@@ -17,7 +17,7 @@ pip install PySDE
 For now, clone the repo locally and install:
 
 ```bash
-git clone https://github.com/yourname/fin-sde.git
+git clone https://github.com/PrasunBanerjee04/PySDE.git
 cd PySDE
 pip install -e .
 ```
@@ -81,6 +81,40 @@ Captures stochastic volatility with a power-law drift:
 - User Defined SDEs
 
 ---
+
+## Repository Structure 
+
+``` 
+PySDE/
+├── src/ 
+│   ├── __init__.py
+│   ├── simulate.py
+│   ├── estimate.py
+│   ├── fit.py
+│   ├── custom.py
+│   ├── plot.py
+│   ├── datasets.py
+│   └── utils.py
+│
+├── examples/
+│   ├── simulate_builtin_gbm.ipynb
+│   ├── fit_heston_to_vix.ipynb
+│   └── custom_clustered_ou.ipynb
+│
+├── tests/
+│   ├── test_simulate.py
+│   ├── test_estimate.py
+│   ├── test_custom.py
+│   └── test_fit.py
+│
+├── setup.py
+├── pyproject.toml
+├── README.md             
+├── LICENSE             
+└── .gitignore          
+
+
+```
 
 ## License
 
