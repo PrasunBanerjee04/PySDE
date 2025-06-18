@@ -86,7 +86,7 @@ Captures stochastic volatility with a power-law drift:
 
 ``` 
 PySDE/
-├── src/ 
+├── PySDE/ 
 │   ├── __init__.py
 │   ├── simulate.py
 │   ├── estimate.py

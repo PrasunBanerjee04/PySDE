@@ -39,15 +39,12 @@ def estimate_gbm_mle(
     if dt <= 0:
         raise ValueError("dt must be positive.")
 
-    # compute log-returns
     log_r = np.diff(np.log(prices))
     n = log_r.size
 
-    # sample moments
     mean_lr = np.mean(log_r)
     var_lr = np.var(log_r, ddof=1)
 
-    # MLE estimates
     sigma = np.sqrt(var_lr / dt)
     mu = mean_lr / dt + 0.5 * sigma**2
     return {"mu": mu, "sigma": sigma}
@@ -73,19 +70,26 @@ def estimate_ou_mle(
     x1 = series[1:]
     n = x0.size
 
-    phi = np.sum(x0 * x1) / np.sum(x0 * x0)
-    if not (0 < phi < 1):
-        raise EstimationError(f"Estimated phi out of bounds: {phi}")
-
+    # Calculate phi with numerical stability check
+    denominator = np.sum(x0 * x0)
+    if denominator < 1e-10:  # Avoid division by zero
+        raise EstimationError("Numerically unstable estimation - near constant series")
+    
+    phi = np.sum(x0 * x1) / denominator
+    
+    # Clip phi to valid range with small buffer
+    phi = np.clip(phi, 1e-6, 1 - 1e-6)
+    
+    # Calculate remaining parameters
     theta = -np.log(phi) / dt
     mu = (np.mean(x1) - phi * np.mean(x0)) / (1 - phi)
 
+    # Calculate sigma with stability checks
     resid = x1 - (phi * x0 + (1 - phi) * mu)
     var_e = np.sum(resid**2) / n
-    sigma = np.sqrt(2 * theta * var_e / (1 - phi**2))
+    sigma = np.sqrt(np.maximum(2 * theta * var_e / (1 - phi**2), 1e-10))
 
     return {"theta": theta, "mu": mu, "sigma": sigma}
-
 
 def estimate_cir_mle(
     series: np.ndarray,

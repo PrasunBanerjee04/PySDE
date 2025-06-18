@@ -13,24 +13,24 @@ except ImportError:
     _numba_jit = None
 
 
-def make_time_grid(T, dt):
-    """
-    Create a 1D numpy array of time points from 0 to T (inclusive) with step dt.
-
+def generate_time_grid(t0, T, n_steps):
+    """Generate time grid from t0 to T with n_steps points.
+    
     Parameters
     ----------
+    t0 : float
+        Start time
     T : float
-        Total time horizon.
-    dt : float
-        Time step size.
-
+        End time
+    n_steps : int
+        Number of steps
+        
     Returns
     -------
     numpy.ndarray
-        Array of shape (N+1,) where N = int(T/dt).
+        Time grid of shape (n_steps + 1,)
     """
-    N = int(np.ceil(T / dt))
-    return np.linspace(0, N * dt, N + 1)
+    return np.linspace(t0, T, n_steps + 1)
 
 
 def finite_diff(f, x, h=1e-5):

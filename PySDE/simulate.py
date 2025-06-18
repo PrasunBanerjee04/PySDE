@@ -1,5 +1,5 @@
 import numpy as np
-from utils import generate_time_grid
+from .utils import generate_time_grid
 
 
 def simulate_gbm(

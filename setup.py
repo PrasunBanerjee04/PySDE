@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="fin-sde",
+    name="PySDE",
     version="0.1.0",
     description="Simulation and estimation toolkit for financial stochastic differential equations",
     author="Prasun Banerjee",
@@ -14,7 +14,8 @@ setup(
         "scipy",
         "pandas",
         "numba",
-        "torch"
+        "torch",
+        "pytest"
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
