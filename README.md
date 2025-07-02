@@ -103,9 +103,9 @@ PySDE/
 │
 ├── tests/
 │   ├── test_simulate.py
-│   ├── test_estimate.py
-│   ├── test_custom.py
-│   └── test_fit.py
+│   └── demo.ipynb # notebook for demonstrating use-cases
+│   
+│   
 │
 ├── setup.py
 ├── pyproject.toml
